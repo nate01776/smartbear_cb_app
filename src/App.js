@@ -18,7 +18,20 @@ class App extends Component {
 
     this.state = {
       historicalData: null, 
-      currencyList: null,
+      currencyList: [
+        {
+          "currency": "CAD",
+          "country": "Canadian Dollar"
+        },
+        {
+          "currency": "GBP",
+          "country": "British Pound Sterling"
+        },
+        {
+          "currency": "USD",
+          "country": "United States Dollar"
+        }
+      ],
       currency: "USD"
     }
     this.onCurrencySelect = this.onCurrencySelect.bind(this)
@@ -70,7 +83,7 @@ class App extends Component {
   }
 
   getCurrencyList() {
-    fetch(`http://34.221.226.137:8081/v2/countryCode`)
+    fetch(`https://5xvi737uh6.execute-api.us-west-2.amazonaws.com/RUN/v2/countryCode`, {mode: 'no-cors'})
       .then(response => response.json())
       .then(currencyList => this.setState({currencyList}))
       .catch(e => e)
