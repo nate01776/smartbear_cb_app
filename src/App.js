@@ -7,8 +7,6 @@ import moment from 'moment';
 import currencies from './supported-currencies.json';
 import BPIList from './components/BPIList';
 
-console.log(currencies)
-
 class App extends Component {
   constructor (props) {
     super(props)
