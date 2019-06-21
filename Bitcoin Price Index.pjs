@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root signature="{24B6FA0B-0143-461A-9758-AEB9E9A9428B}" version="14.0" key="{0EBF474E-8E23-4FED-A356-56279FD18EC5}">
+	<children>
+		<child name="Bitcoin Price Index" key="{6EF98EFA-D926-476C-A1F9-A6D55314BD9C}" path="..\Gartner MQ 2019\Bitcoin Price Index\Bitcoin Price Index.mds" />
+	</children>
+	<testItems key="{96E95786-AAE4-4EA3-A8C2-B274301E5C9F}">
+		<children>
+			<testItem key="{6EF98EFA-D926-476C-A1F9-A6D55314BD9C}" enabled="True" timeout="0" stopOnError="True" description="" />
+		</children>
+	</testItems>
+	<variables key="{C5FAF04F-888A-43C7-8405-8B043C0E75AC}">
+		<data Version="3" />
+	</variables>
+	<analysis key="{CC7B2A54-9361-4782-8799-A541E886334A}" />
+	<scc key="{00000000-0000-0000-0000-000000000000}" name="">
+		<data />
+	</scc>
+	<extender key="{1A3FC97E-9A66-4716-B166-35D10B4146E0}">
+		<CrossBrowserTesting Enable="True" />
+	</extender>
+</Root>
