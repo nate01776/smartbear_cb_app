@@ -4,7 +4,7 @@ import './App.css';
 import _ from 'lodash';
 import { Line, Chart } from 'react-chartjs-2';
 import moment from 'moment';
-// import currencies from './supported-currencies.json';
+import currencies from './supported-currencies.json';
 import BPIList from './components/BPIList';
 
 
@@ -17,21 +17,7 @@ class App extends Component {
     Chart.defaults.global.defaultFontSize = 16;
 
     this.state = {
-      historicalData: null, 
-      currencyList: [
-        {
-          "currency": "CAD",
-          "country": "Canadian Dollar"
-        },
-        {
-          "currency": "GBP",
-          "country": "British Pound Sterling"
-        },
-        {
-          "currency": "USD",
-          "country": "United States Dollar"
-        }
-      ],
+      historicalData: null,
       currency: "USD"
     }
     this.onCurrencySelect = this.onCurrencySelect.bind(this)
@@ -104,18 +90,17 @@ class App extends Component {
           <Header title="GLOBAL BITCOIN PRICE INDEX" />
 
           <div className="select-container">
+            <span style={{fontSize: 18, fontFamily: 'Archivo Black'}}> Select your currency: </span>
             <select value={this.state.currency} onChange={this.onCurrencySelect}>
-              {this.state.currencyList.map((obj, index) =>
+              {currencies.map((obj, index) =>
                 <option key={`${index}-${obj.country}`} value={obj.currency}> {obj.currency} </option>
               )}
             </select>
-            <span style={{fontSize: 18, fontFamily: 'Archivo Black'}}>  Select your currency</span>
             {
               this.state.currency !== 'USD' && (<div>
                 <p className="link" onClick={() => this.setCurrency('USD')} style={{color: "black", fontSize: 16, fontFamily: 'Archivo Black'}}> [CLICK HERE TO RESET] </p>
               </div>)
             }
-            
           </div>
             <div className="body-container">
               <div style={{marginTop: 10}}>
