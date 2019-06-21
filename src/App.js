@@ -4,7 +4,7 @@ import './App.css';
 import _ from 'lodash';
 import { Line, Chart } from 'react-chartjs-2';
 import moment from 'moment';
-import currencies from './supported-currencies.json';
+// import currencies from './supported-currencies.json';
 import BPIList from './components/BPIList';
 
 
@@ -16,15 +16,21 @@ class App extends Component {
     Chart.defaults.global.defaultFontColor = '#000';
     Chart.defaults.global.defaultFontSize = 16;
 
-    this.state = {historicalData: null, currency: "USD"}
+    this.state = {
+      historicalData: null, 
+      currencyList: null,
+      currency: "USD"
+    }
     this.onCurrencySelect = this.onCurrencySelect.bind(this)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.getBitcoinData()
   }
 
   getBitcoinData () {
+    this.getCurrencyList()
+
     fetch(`https://api.coindesk.com/v1/bpi/historical/close.json?currency=${this.state.currency}`)
       .then(response => response.json())
       .then(historicalData => this.setState({historicalData}))
@@ -41,8 +47,8 @@ class App extends Component {
           label: "Bitcoin",
           fill: true,
           lineTension: 0.1,
-          backgroundColor: 'rgba(75,192,192,0.4)',
-          borderColor: 'rgba(75,192,192,1)',
+          backgroundColor: 'rgba(255,23,105,0.4)',
+          borderColor: 'rgba(255,23,105,1)',
           borderCapStyle: 'butt',
           borderDash: [],
           borderDashOffset: 0.0,
@@ -62,6 +68,13 @@ class App extends Component {
     }
   }
 
+  getCurrencyList() {
+    fetch(`http://34.221.226.137:8081/v2/countryCode`)
+      .then(response => response.json())
+      .then(currencyList => this.setState({currencyList}))
+      .catch(e => e)
+  }
+
   setCurrency (currency) {
     this.setState({currency}, this.getBitcoinData)
   }
@@ -74,24 +87,25 @@ class App extends Component {
     if (this.state.historicalData) {
       return (
         <div className="app">
-          <Header title="USD BITCOIN PRICE INDEX" />
+          <Header title="GLOBAL BITCOIN PRICE INDEX" />
 
           <div className="select-container">
-            {/* <span style={{fontSize: 18, fontFamily: 'Archivo Black'}}> Select your currency: </span> */}
-            {/* <select value={this.state.currency} onChange={this.onCurrencySelect}>
-              {currencies.map((obj, index) =>
+            <select value={this.state.currency} onChange={this.onCurrencySelect}>
+              {this.state.currencyList.map((obj, index) =>
                 <option key={`${index}-${obj.country}`} value={obj.currency}> {obj.currency} </option>
               )}
-            </select> */}
+            </select>
+            <span style={{fontSize: 18, fontFamily: 'Archivo Black'}}>  Select your currency</span>
             {
               this.state.currency !== 'USD' && (<div>
-                <a href="#" className="link" onClick={() => this.setCurrency('USD')} style={{color: "black", fontSize: 16, fontFamily: 'Archivo Black'}}> [CLICK HERE TO RESET] </a>
+                <p className="link" onClick={() => this.setCurrency('USD')} style={{color: "black", fontSize: 16, fontFamily: 'Archivo Black'}}> [CLICK HERE TO RESET] </p>
               </div>)
             }
+            
           </div>
             <div className="body-container">
               <div style={{marginTop: 10}}>
-                <Line data={this.formatChartData()} height={250} />
+                <Line data={this.formatChartData()} height={200} />
               </div>
               <div>
                 <h2>Dates</h2>
@@ -101,7 +115,7 @@ class App extends Component {
           
 
           <div className="subheader-body">
-            <span className="subheader"> Powered by <a className="link" target="_blank" href="https://www.coindesk.com/price/">CoinDesk</a>. </span>
+            <span className="subheader"> Powered by <a className="link" target="_blank" rel="noopener noreferrer" href="https://www.coindesk.com/price/">CoinDesk</a>. </span>
           </div>
         </div>
       )

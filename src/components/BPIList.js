@@ -6,14 +6,16 @@ const BPIList = props => {
     
     for (var property in inputData) {
         
-        let item = <tr><td>{property}</td><td>{inputData[property]} {props.currency}</td></tr>
+        let item = <tr key={property}><td>{property}</td><td>{inputData[property]} {props.currency}</td></tr>
         renderData.unshift(item)
     }
 
     return (
         <div className="listColumn">
             <table>
-                {renderData}
+                <tbody>
+                    {renderData}
+                </tbody>
             </table>
         </div>
     )

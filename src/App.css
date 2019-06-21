@@ -13,24 +13,25 @@ span.bungee { font-family: 'Archivo Black', sans-serif; }
 .header { 
   font-size: 40px; 
   font-family: 'Archivo Black', sans-serif; 
-  color: #ff1769;
+  background-color: #ff1769;
+  color: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1), 0 2px 5px rgba(0,0,0,0.2);
+  padding: 20px;
 }
 .subheader { font-size: 20px; font-family: 'Archivo Black', sans-serif; }
 
-a.link {
+.link {
   text-decoration: none;
   color: #ff1769;
 }
 
-a.link:hover {
+.link:hover {
   text-decoration: none;
-  border-bottom: 2px solid #000;
+  cursor: pointer;
 }
 
 .select-container {
-  margin-top: 20px;
-  border-top: 1px solid lightgrey;
-  padding-top: 20px;
 }
 
 .select-container select {
@@ -47,6 +48,7 @@ a.link:hover {
   border: 1px solid #ff1769;
   border-radius: 10px;
   margin-left: 10px;
+  margin-right: 10px;
 }
 
 .select-container select:focus {
